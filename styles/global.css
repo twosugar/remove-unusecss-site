@@ -1,0 +1,33 @@
+/*
+ * @Description: 全局css
+ * @Date: 2021-08-19 15:55:1
+ * @FilePath: /dev/random-nickname/styles/global.css
+ * @LastEditTime: 2021-10-11 18:27:26
+ */
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: #0070f3;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+main {
+  height: 100%;
+  
+}
