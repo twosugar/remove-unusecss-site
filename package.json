@@ -11,6 +11,7 @@
     "@sugarfish/random-nickname": "^1.0.4",
     "antd": "^4.15.6",
     "classnames": "^2.3.1",
+    "cors": "^2.8.5",
     "next": "^11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
