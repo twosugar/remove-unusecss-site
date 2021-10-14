@@ -3,7 +3,7 @@ import Cors from 'cors'
 
 const cors = Cors({
     methods: ['GET', 'HEAD'],
-    origin: ['http://localhost:3000', 'http://sugarfish:3000']
+    origin: ['http://localhost:3000', 'http://www.sugarfish.top:3000']
 })
 
 const nickname = new RandomNickname()
