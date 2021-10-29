@@ -1,5 +1,4 @@
 import RemoveUnusecss from 'remove-unusecss'
-
 export default async (req, res) => {
     try {
         await RemoveUnusecss.init()
