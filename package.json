@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next -p 3002",
     "build": "next build",
-    "start": "next start -p 3001",
+    "start": "next start -p 3002",
     "init-chromium": "node script/index.js"
   },
   "dependencies": {
