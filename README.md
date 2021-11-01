@@ -16,6 +16,7 @@ remove unusecss. 移除未被使用的css。在前端性能优化中，你可能
 需要设置
 ```
 const browser = await puppeteer.launch({
+    headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
 ```
