@@ -5,7 +5,9 @@
 
 项目第一次调用remove-unusecss时，会自动下载chromium，会等待几分钟
 
-下载chromium成功后，运行项目，若仍提示需要下载chromium， 说明chromium解压出现了问题，这个时候可以运行`npm run init-chromium`,将在本地重修下载, 下载成功得到解压目录之后，将目录地址配置到config传给`remove-unusecss`
+下载chromium成功后，运行项目，若仍提示需要下载chromium， 说明chromium解压出现了问题，
+
+需要自己在本地重修下载, 下载成功得到解压目录之后，将目录地址配置到config传给`remove-unusecss`
 `
 const config = 
     ......
