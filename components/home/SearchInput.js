@@ -1,10 +1,8 @@
 import Styles from './search-input.module.css'
-import { Input, message, Form, Popover, Button, Radio, Select, Space } from 'antd'
-import { LoadingOutlined, PlusOutlined, MinusCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons'
+import { Input, message, Form, Popover, Button, Radio, Select } from 'antd'
+import { PlusOutlined, MinusCircleOutlined, QuestionCircleOutlined } from '@ant-design/icons'
 import { useEffect, useState } from 'react';
 import { post } from '../../lib/request'
-
-const { Search } = Input;
 
 const actionList = [
     { title: '点击元素', type: 'CLICK', selector: '' },
@@ -24,7 +22,7 @@ const initActions = [
 let info = {}
 
 export default function SearchInput() {
-    const [chromeiumLoading, setChromeiumLoading] = useState(false)
+    const [initStatus, setInitStatus] = useState(true)
     const [loading, setLoading] = useState(false)
     const [actionInfo, setActionInfo] = useState({ info })
     const [unUseCss, setUnuseCss] = useState('')
@@ -32,6 +30,8 @@ export default function SearchInput() {
 
     const startRemoveCss = (config) => {
         setLoading(true)
+        setUseCss('')
+        setUnuseCss('')
         post('/api/getUnuseCss', { config })
             .then(res => {
                 // setName(res.text)
@@ -39,6 +39,7 @@ export default function SearchInput() {
                 const { unuseCss, useCss } = res.data ?? {}
                 setUnuseCss(unuseCss)
                 setUseCss(useCss)
+                setInitStatus(false)
             })
             .catch(err => {
                 message.error('自动化失败，请稍后再试')
@@ -53,25 +54,7 @@ export default function SearchInput() {
             const element = initActions[i];
             actionChange({ fieldKey: i }, element.type)
         }
-        initDownLoadChromeium()
     }, [])
-
-    /**
-     * @description: 初始化chromeium
-     */
-    const initDownLoadChromeium = () => {
-        setChromeiumLoading(true)
-        post('/api/initChromeium')
-            .then(res => {
-                if (!res?.success) {
-                    message.error(res.errorMessage)
-                    return
-                }
-            })
-            .finally(() => {
-                setChromeiumLoading(false)
-            })
-    }
 
     /**
      * @description: 选择操作
@@ -122,7 +105,6 @@ export default function SearchInput() {
      * @description: 提交
      */
     const onFinish = (values = {}) => {
-        if (chromeiumLoading) return 
         let params = {}
         if (values.browseMode === 'mobile') {
             params = {
@@ -154,7 +136,16 @@ export default function SearchInput() {
     return <div className={Styles.container}>
         <h1 className={Styles.title}>RemoveUnusecss</h1>
         {
-            chromeiumLoading && <div className={Styles.tips}>初始化中<LoadingOutlined /> 整个过程可能持续几分钟请耐心等待</div>
+            !initStatus && <div className={Styles.cssContainer}>
+                <div className={Styles.cssItemBox}>
+                    <h2>已被使用的css:</h2>
+                    <Input.TextArea rows={15} showCount value={useCss} />
+                </div>
+                <div className={Styles.cssItemBox}>
+                    <h2>未被使用的css:</h2>
+                    <Input.TextArea rows={15} showCount value={unUseCss} />
+                </div>
+            </div>
         }
         {/* <Search className={Styles.search} size="large" enterButton="点我" placeholder="愤怒的小鸟" loading={loading} onSearch={onSearch}/> */}
         <Form
@@ -278,15 +269,5 @@ export default function SearchInput() {
                 </Button>
             </Form.Item>
         </Form>
-        <div className={Styles.cssContainer}>
-            <div className={Styles.cssItemBox}>
-                <h2>已被使用的css:</h2>
-                <Input.TextArea rows={30} showCount value={useCss}/>
-            </div>
-            <div className={Styles.cssItemBox}>
-                <h2>未被使用的css:</h2>
-                <Input.TextArea rows={30} showCount value={unUseCss} />
-            </div>
-        </div>
     </div>
 }

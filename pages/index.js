@@ -7,7 +7,7 @@ export default function Home({ initialState }) {
     <Layout>
       <Menu mode="horizontal">
         <Menu.Item key="github">
-          <a href="https://github.com/twosugar/random-nickname" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/twosugar/remove-unusecss-site" target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
         </Menu.Item>
