@@ -1,22 +1,26 @@
 ### Remove-UnUseCSS
-用于区分出当前页面已被使用和未被使用的css，可用于项目css体积优化
+remove unusecss. 移除未被使用的css。在前端性能优化中，你可能会发现某个页面引入了较多或者较大的css文件，而真正用于当前页面的css只占据了一小部分，而缩减css体积正是前端性能优化的方向之一,目前有一些网站可以针对页面进行css提取，但对于动态变化的页面，其准确率就相当低了。
 
-借助插件[remove-unusecss](https://github.com/twosugar/remove-unusecss)
+利用chrome coverage统计 + puppeteer自动化的方式提取更为准确的"关键css"
 
-项目第一次调用remove-unusecss时，会自动下载chromium，会等待几分钟
+### 服务器部署踩坑（CentOS）
+## 依赖
+ ![image](http://www.sugarfish.top:3002/img/Error.png)
+ 运行puppeteer 遇到这种问题需要依次安装依赖 https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md
+ ```
+ yum install libxshmfence -y
+ ```
+总之缺啥安装啥
 
-下载chromium成功后，运行项目，若仍提示需要下载chromium， 说明chromium解压出现了问题，
-
-需要自己在本地重修下载, 下载成功得到解压目录之后，将目录地址配置到config传给`remove-unusecss`
-`
-const config = 
-    ......
-    browserConfig: {
-        executablePath: '/Users/ytang/Documents/dev/remove-unusecss-site/node_modules/remove-unusecss/.local-chromium/mac-901912/chrome-mac/Chromium.app/Contents/MacOS/Chromium'
-    }
-}
-`
+## 运行报错 puppeteer Running as root without --no-sandbox is not supported
+需要设置
+```
+const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
+```
 ### 项目搭建
+
 This is a starter template for [Learn Next.js](https://nextjs.org/learn).
 ### nextjs 搭配 antd
 
