@@ -3,6 +3,10 @@ remove unused css.利用puppeteer自动化的能力，移除未被使用的css�
 
 利用chrome coverage统计 + puppeteer自动化的方式提取更为准确的"关键css"
 
+### Demo
+
+http://www.sugarfish.top:3002/
+
 ### 服务器部署踩坑（CentOS）
 ## 依赖
  ![image](http://www.sugarfish.top:3002/img/Error.png)
